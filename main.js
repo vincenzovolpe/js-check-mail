@@ -2,13 +2,14 @@
 var listamail= ['pincopallina@gmail.com','tizioecaio@gmail.com','romeoegiulietta@gmail.it', 'cazzarola@gmail.it', 'topolino2010@yahoo.com'];
 console.log(listamail);
 
-// Espressione regolare che controlla la validitàdell'email inserita
-var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+// Espressione regolare che controlla la validità dell'email inserita
+var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
 // Richiesta email all'utente
 var mailutente = prompt('Per favore digita la tua email');
 console.log("Questa è l'email inserita dall'utente: " + mailutente);
 
+// verifico se l'email è scritta correttamente altrimenti richiedo l'informazione
 for (v = reg.test(mailutente); v == 0; v = reg.test(mailutente)){
     console.log("Il formato dell'email inserita non è valido");
     mailutente = prompt('Per favore digita di nuovo la tua email');
