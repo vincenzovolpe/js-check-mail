@@ -7,7 +7,7 @@ var reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 // dichiaro una variabile con la risposta imposta a true per far partire il ciclo
 var rispostautente = true;
 while (rispostautente) {
-    document.getElementById('risultato').style.display = "none";
+    document.getElementById('risultato').setAttribute("class", "notvisible");
     // Mostriamo titolo della ricerca
     document.getElementById("titolo").innerHTML = "DATABASE DELLE EMAIL";
     // Richiesta email all'utente
@@ -16,12 +16,15 @@ while (rispostautente) {
     var v = reg.test(mailutente);
     while (!v) {
         // Chiedo all'utente se vuole riprovare a inserire  l'email
-        rispostautente = confirm("Attenzione il formato dell'email che hai inserito non è valido. Vuoi riprovare a cercare?");
+        document.getElementById('messaggio').setAttribute("class", "visible");
+        document.getElementById("messaggio").innerHTML = "Attenzione il formato dell'email che hai inserito non è valido";
+        document.getElementById("messaggio").style.color = "purple";
+        rispostautente = confirm("Vuoi riprovare a cercare?");
         if (rispostautente) {
+            document.getElementById('messaggio').setAttribute("class", "notvisible");
             mailutente = prompt("Per favore digita di nuovo l'email da cercare");
             v = reg.test(mailutente);
         } else {
-            alert('Hai scelto di smettere la ricerca, torna a trovarci in un altro momento');
             break; // Esco dal for in quanto l'utente non vuole più cercare
         }
     }
@@ -34,7 +37,7 @@ while (rispostautente) {
             //if (listamail[i].match(mailutente)) { ricerca con funzione match
             if (listamail[i] == mailutente) { // ricerca con operatore di uguaglianza
                 var trovata = true; // imposto la variabile di controllo a true
-                document.getElementById('risultato').style.display = "block";
+                document.getElementById('risultato').setAttribute("class", "visible");
                 document.getElementById("risultato").innerHTML = "La tua email è presente nel nostro database.";
                 document.getElementById("risultato").style.color = "green";
                 break; // Esco dal for in quanto l'email è stata trovata
@@ -42,10 +45,13 @@ while (rispostautente) {
         }
         // Stampo messaggio esito negativo della ricerca
         if (!trovata) {
-            document.getElementById('risultato').style.display = "block";
+            document.getElementById('risultato').setAttribute("class", "visible");
             document.getElementById("risultato").innerHTML = "Siamo spiacenti ma la tua email non risulta presente nel nostro database";
             document.getElementById("risultato").style.color = "red";
         }
         rispostautente = confirm('Vuoi cercare un altra email?');
     }
 }
+document.getElementById('risultato').setAttribute("class", "notvisible");
+document.getElementById('messaggio').innerHTML = "Hai scelto di smettere la ricerca, torna a trovarci in un altro momento";
+document.getElementById("messaggio").style.color = "purple";
