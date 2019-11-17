@@ -7,6 +7,7 @@ var reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 // dichiaro una variabile con la risposta imposta a true per far partire il ciclo
 var rispostautente = true;
 while (rispostautente) {
+    document.getElementById('risultato').style.display = "none";
     // Mostriamo titolo della ricerca
     document.getElementById("titolo").innerHTML = "DATABASE DELLE EMAIL";
     // Richiesta email all'utente
@@ -33,6 +34,7 @@ while (rispostautente) {
             //if (listamail[i].match(mailutente)) { ricerca con funzione match
             if (listamail[i] == mailutente) { // ricerca con operatore di uguaglianza
                 var trovata = true; // imposto la variabile di controllo a true
+                document.getElementById('risultato').style.display = "block";
                 document.getElementById("risultato").innerHTML = "La tua email è presente nel nostro database.";
                 document.getElementById("risultato").style.color = "green";
                 break; // Esco dal for in quanto l'email è stata trovata
@@ -40,6 +42,7 @@ while (rispostautente) {
         }
         // Stampo messaggio esito negativo della ricerca
         if (!trovata) {
+            document.getElementById('risultato').style.display = "block";
             document.getElementById("risultato").innerHTML = "Siamo spiacenti ma la tua email non risulta presente nel nostro database";
             document.getElementById("risultato").style.color = "red";
         }
