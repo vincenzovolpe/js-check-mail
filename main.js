@@ -14,7 +14,7 @@ while (rispostautente) {
     var mailutente = prompt("Per favore digita l'email da cercare");
     // verifico se l'email è scritta correttamente altrimenti chiedo di riprovare a scriverla
     var v = reg.test(mailutente);
-    while (!v) {
+    while (!v && rispostautente) {
         // Chiedo all'utente se vuole riprovare a inserire  l'email
         document.getElementById('messaggio').setAttribute("class", "visible");
         document.getElementById("messaggio").innerHTML = "Attenzione il formato dell'email che hai inserito non è valido";
@@ -25,7 +25,7 @@ while (rispostautente) {
             mailutente = prompt("Per favore digita di nuovo l'email da cercare");
             v = reg.test(mailutente);
         } else {
-            break; // Esco dal for in quanto l'utente non vuole più cercare
+            rispostautente = false;
         }
     }
 
@@ -33,14 +33,13 @@ while (rispostautente) {
     if (v || rispostautente) {
         // Controllo esistenza email digitata dall'utente all'interno dell' array di email
         var trovata = false; // dichiaro una variabile di controllo impostata a false
-        for (i = 0; i < listamail.length; i++) {
+        for (i = 0; (i < listamail.length) && (trovata = false); i++) {
             //if (listamail[i].match(mailutente)) { ricerca con funzione match
             if (listamail[i] == mailutente) { // ricerca con operatore di uguaglianza
                 var trovata = true; // imposto la variabile di controllo a true
                 document.getElementById('risultato').setAttribute("class", "visible");
                 document.getElementById("risultato").innerHTML = "La tua email è presente nel nostro database.";
                 document.getElementById("risultato").style.color = "green";
-                break; // Esco dal for in quanto l'email è stata trovata
             }
         }
         // Stampo messaggio esito negativo della ricerca
